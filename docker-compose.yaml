@@ -12,8 +12,8 @@ services:
       - "6881:6881/udp"
       - "8090:8090"
     volumes:
-      - ./data/config/qbittorrent_config:/config
-      - ./data/data/torrents:/data/torrents:rw
+      - /mnt/main_drive/data/config/qbittorrent_config:/config
+      - /mnt/main_drive/data/data/torrents:/data/torrents:rw
     restart: unless-stopped
 
   prowlarr:
@@ -26,7 +26,7 @@ services:
     ports:
       - "9696:9696"
     volumes:
-      - ./data/config/prowlarr:/config
+      - /mnt/main_drive/data/config/prowlarr:/config
     restart: unless-stopped
 
   sonarr:
@@ -39,8 +39,20 @@ services:
     ports:
       - "8989:8989"
     volumes:
-      - ./data/config/sonarr:/config
-      - ./data/data/media:/data
+      - /mnt/main_drive/data/config/sonarr:/config
+      - /mnt/main_drive/data/data/media:/data
+
+
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    environment:
+      - FB_BASEURL=/filebrowser
+    user: 1000:1000
+    volumes:
+      - /mnt/main_drive:/srv
+      - /mnt/main_drive/config/filebrowser.db:/database.db
+    restart: unless-stopped
 
 #  FlareSolverr:
 #    image: ghcr.io/flaresolverr/flaresolverr
