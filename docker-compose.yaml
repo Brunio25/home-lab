@@ -1,0 +1,63 @@
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - WEBUI_PORT=8090
+    ports:
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "8090:8090"
+    volumes:
+      - ./data/config/qbittorrent_config:/config
+      - ./data/data/torrents:/data/torrents:rw
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - "9696:9696"
+    volumes:
+      - ./data/config/prowlarr:/config
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./data/config/sonarr:/config
+      - ./data/data/media:/data
+
+#  FlareSolverr:
+#    image: ghcr.io/flaresolverr/flaresolverr
+#    container_name: FlareSolverr
+#    environment:
+#      - TZ=${TIMEZONE}
+#    ports:
+#      - "8191:8191"
+#    restart: unless-stopped
+
+#  sonarr:
+#    image: lscr.io/linuxserver/sonarr
+#    container_name: sonarr
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=${TIMEZONE}
+#    ports:
+#      - "8989:8989"
+#    restart: unless-stopped
