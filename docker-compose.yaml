@@ -40,7 +40,7 @@ services:
       - "8989:8989"
     volumes:
       - /mnt/main_drive/config/sonarr:/config
-      - /mnt/main_drive/data/media:/data
+      - /mnt/main_drive/data:/data
 
 
   filebrowser:
