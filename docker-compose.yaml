@@ -56,6 +56,16 @@ services:
       - /mnt/main_drive/config/filebrowser/filebrowser.db:/database.db
     restart: unless-stopped
 
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/main_drive/config/portainer/data:/data
+    restart: unless-stopped
+
 #  FlareSolverr:
 #    image: ghcr.io/flaresolverr/flaresolverr
 #    container_name: FlareSolverr
@@ -63,15 +73,4 @@ services:
 #      - TZ=${TIMEZONE}
 #    ports:
 #      - "8191:8191"
-#    restart: unless-stopped
-
-#  sonarr:
-#    image: lscr.io/linuxserver/sonarr
-#    container_name: sonarr
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=${TIMEZONE}
-#    ports:
-#      - "8989:8989"
 #    restart: unless-stopped
