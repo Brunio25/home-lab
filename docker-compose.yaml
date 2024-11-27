@@ -42,6 +42,19 @@ services:
       - /mnt/main_drive/config/sonarr:/config
       - /mnt/main_drive/data:/data
 
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarrr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - "7878:7878"
+    volumes:
+      - /mnt/main_drive/config/radarr:/config
+      - /mnt/main_drive/data:/data
+
 
   filebrowser:
     image: filebrowser/filebrowser
