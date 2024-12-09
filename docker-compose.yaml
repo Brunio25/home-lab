@@ -55,22 +55,37 @@ services:
       - /mnt/main_drive/config/radarr:/config
       - /mnt/main_drive/data:/data
 
-  jellyfin:
-    image: jellyfin/jellyfin
-    container_name: jellyfin
+  bazarr:
+    image: lscr.io/linuxserver/bazarr
+    container_name: bazarr
     environment:
-      - JELLYFIN_PublishedServerUrl=http://home-lab.lan/jellyfin
-    user: 1000:1000
-    volumes:
-      - /mnt/main_drive/config/jellyfin/config:/config
-      - /mnt/main_drive/config/jellyfin/cache:/cache
-      - /mnt/main_drive/data/media:/media:ro
-      - type: tmpfs
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
     ports:
-      - "8920:8920"
-      - "1900:1900/udp"
-      - "7359:7359/udp"
+      - "6767:6767"
+    volumes:
+      - /mnt/main_drive/config/bazarr:/config
+      - /mnt/main_drive/data/media/movies:/movies
+      - /mnt/main_drive/data/media/tv:/tv
     restart: unless-stopped
+
+  #  jellyfin:
+#    image: jellyfin/jellyfin
+#    container_name: jellyfin
+#    environment:
+#      - JELLYFIN_PublishedServerUrl=http://home-lab.lan/jellyfin
+#    user: 1000:1000
+#    volumes:
+#      - /mnt/main_drive/config/jellyfin/config:/config
+#      - /mnt/main_drive/config/jellyfin/cache:/cache
+#      - /mnt/main_drive/data/media:/media:ro
+#      - type: tmpfs
+#    ports:
+#      - "8920:8920"
+#      - "1900:1900/udp"
+#      - "7359:7359/udp"
+#    restart: unless-stopped
 
 
   filebrowser:
@@ -95,12 +110,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/main_drive/config/portainer/data:/data
     restart: unless-stopped
-
-#  FlareSolverr:
-#    image: ghcr.io/flaresolverr/flaresolverr
-#    container_name: FlareSolverr
-#    environment:
-#      - TZ=${TIMEZONE}
-#    ports:
-#      - "8191:8191"
-#    restart: unless-stopped
