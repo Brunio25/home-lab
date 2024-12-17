@@ -80,7 +80,6 @@ services:
       - /mnt/main_drive/config/jellyfin/config:/config
       - /mnt/main_drive/config/jellyfin/cache:/cache
       - /mnt/main_drive/data/media:/media
-      - type: tmpfs
     ports:
       - "8920:8920"
       - "1900:1900/udp"
