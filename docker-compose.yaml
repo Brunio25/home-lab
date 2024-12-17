@@ -79,7 +79,7 @@ services:
     volumes:
       - /mnt/main_drive/config/jellyfin/config:/config
       - /mnt/main_drive/config/jellyfin/cache:/cache
-      - /mnt/main_drive/data/media:/media:ro
+      - /mnt/main_drive/data/media:/media
       - type: tmpfs
     ports:
       - "8920:8920"
