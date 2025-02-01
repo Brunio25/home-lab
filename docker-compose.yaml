@@ -66,8 +66,7 @@ services:
       - "6767:6767"
     volumes:
       - /mnt/main_drive/config/bazarr:/config
-      - /mnt/main_drive/data/media/movies:/movies
-      - /mnt/main_drive/data/media/tv:/tv
+      - /mnt/main_drive/data/media/:/
     restart: unless-stopped
 
   jellyfin:
