@@ -110,7 +110,7 @@ services:
       - "9000:80"
     volumes:
       - /mnt/main_drive:/srv
-      - /mnt/main_drive/config/filebrowser/filebrowser.db:/database.db
+      - /mnt/main_drive/config/filebrowser:/database
     restart: unless-stopped
 
   portainer:
