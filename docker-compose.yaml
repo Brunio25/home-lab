@@ -77,6 +77,8 @@ services:
     environment:
       - JELLYFIN_PublishedServerUrl=http://home-lab.lan/jellyfin
     user: 1000:1000
+    group_add:
+      - "105" # Change this to match "getent group render | cut -d: -f3"
     volumes:
       - /mnt/main_drive/config/jellyfin/config:/config
       - /mnt/main_drive/config/jellyfin/cache:/cache
